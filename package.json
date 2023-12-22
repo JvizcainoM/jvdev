@@ -1,0 +1,16 @@
+{
+  "name": "com.jvizcode.com.jvizcode.jvdev",
+  "version": "0.0.1",
+  "displayName": "JVDev",
+  "description": "Custom package for develop my games in Unity",
+  "unity": "2022.3",
+  "keywords": [
+    "state machine",
+    "movement",
+    "spawning"
+  ],
+  "author": {
+    "name": "Jorge Vizcaino",
+    "email": "jiscvm@gmail.com"
+  }
+}
