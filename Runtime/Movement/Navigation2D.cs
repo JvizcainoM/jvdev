@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Movement
+namespace JV.Movement
 {
     public sealed class Navigation2D : Navigation
     {

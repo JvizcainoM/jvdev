@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Movement
+namespace JV.Movement
 {
     public abstract class Navigation : MonoBehaviour, IPhysicsBody
     {

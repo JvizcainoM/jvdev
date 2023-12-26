@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SpawnSystem
+namespace JV.SpawnSystem
 {
     public class EntityData : ScriptableObject
     {

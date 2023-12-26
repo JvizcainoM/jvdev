@@ -1,4 +1,4 @@
-﻿namespace Workshop
+﻿namespace JV.StateMachine
 {
     public interface IPredicate
     {
