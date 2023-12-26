@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Workshop
+namespace SpawnSystem
 {
     public interface IEntityFactory<out T> where T : MonoBehaviour
     {

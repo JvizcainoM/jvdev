@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Workshop.SpawnSystem
+namespace SpawnSystem
 {
     public class RandomSpawnPointStrategy : ISpawnPointStrategy
     {
