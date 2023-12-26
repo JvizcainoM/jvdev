@@ -1,6 +1,6 @@
 using System;
 
-namespace Workshop.Utils
+namespace JV.Utils.Timers
 {
     public abstract class Timer
     {

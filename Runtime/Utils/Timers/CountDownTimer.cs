@@ -1,25 +1,26 @@
-﻿using Workshop.Utils;
-
-public class CountDownTimer : Timer
+﻿namespace JV.Utils.Timers
 {
-    public CountDownTimer(float time) : base(time)
+    public class CountDownTimer : Timer
     {
-    }
+        public CountDownTimer(float time) : base(time)
+        {
+        }
 
-    public override void Tick(float deltaTime)
-    {
-        if (IsRunning && Time > 0)
-            Time -= deltaTime;
-        if (IsRunning && Time <= 0)
-            Stop();
-    }
+        public override void Tick(float deltaTime)
+        {
+            if (IsRunning && Time > 0)
+                Time -= deltaTime;
+            if (IsRunning && Time <= 0)
+                Stop();
+        }
 
-    public bool IsFinished => Time <= 0;
-    public void Reset() => Time = initialTime;
+        public bool IsFinished => Time <= 0;
+        public void Reset() => Time = initialTime;
 
-    public void Reset(float newTime)
-    {
-        initialTime = newTime;
-        Reset();
+        public void Reset(float newTime)
+        {
+            initialTime = newTime;
+            Reset();
+        }
     }
 }
