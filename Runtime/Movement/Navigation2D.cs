@@ -147,8 +147,6 @@ namespace JV.Movement
             ClampVelocity();
         }
 
-        #region Physics Interface
-
         public override void AddForce(Vector3 force, ForceMode mode = 0)
         {
             force.z = 0;
@@ -167,8 +165,8 @@ namespace JV.Movement
         {
             if (friction <= 0) return;
 
-            var frictionForce = friction * mass;
-            _velocity.x -= frictionForce * Mathf.Sign(_velocity.x) * Time.deltaTime;
+            var frictionForce = friction / mass;
+            _velocity.x -= frictionForce * Mathf.Sign(_velocity.x);
         }
 
         private void CalculateDrag()
@@ -186,7 +184,5 @@ namespace JV.Movement
                 _velocity.x = 0;
             }
         }
-
-        #endregion
     }
 }
