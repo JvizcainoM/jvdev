@@ -8,9 +8,8 @@ namespace JV.Movement
         protected Vector3 _velocity;
         public bool useGravity = true;
 
-        [Header("Controller")] public CharacterController Controller;
-
-        [Header("Movement")] [Min(0)] public float movementSpeed = 5;
+        public CharacterController Controller;
+        [Min(0)] public float movementSpeed = 5;
 
         [Min(0.1f)] public float mass = 1;
 
