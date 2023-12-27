@@ -165,8 +165,9 @@ namespace JV.Movement
         {
             if (friction <= 0) return;
 
-            var frictionForce = friction / mass;
-            _velocity.x -= frictionForce * Mathf.Sign(_velocity.x);
+            var frictionForce = Mathf.Min(Mathf.Abs(_velocity.x), friction);
+            var frX = frictionForce * Mathf.Sign(_velocity.x);
+            AddForce(new Vector3(frX, 0) * -frictionForce, ForceMode.Impulse);
         }
 
         private void CalculateDrag()
