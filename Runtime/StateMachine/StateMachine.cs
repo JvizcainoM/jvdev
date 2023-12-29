@@ -25,7 +25,7 @@ namespace JV.StateMachine
         public void SetState(IState state)
         {
             _currentNode = _nodes[state.GetType()];
-            _currentNode.State.Enter();
+            _currentNode.State.Enter(null);
         }
 
         private void ChangeState(IState newState)
