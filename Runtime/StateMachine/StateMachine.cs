@@ -28,7 +28,7 @@ namespace JV.StateMachine
             _currentNode.State.Enter(null);
         }
 
-        private void ChangeState(IState newState)
+        public void ChangeState(IState newState)
         {
             if (newState == _currentNode.State)
                 return;
