@@ -28,14 +28,16 @@ namespace JV.StateMachine
             _currentNode.State.Enter();
         }
 
-        private void ChangeState(IState state)
+        private void ChangeState(IState newState)
         {
-            if (state == _currentNode.State)
+            if (newState == _currentNode.State)
                 return;
 
-            _currentNode.State.Exit();
-            _currentNode = _nodes[state.GetType()];
-            _currentNode.State.Enter();
+            var lastState = _currentNode.State;
+        
+            _currentNode.State.Exit(newState);
+            _currentNode = _nodes[newState.GetType()];
+            _currentNode.State.Enter(lastState);
         }
 
         private ITransition GetTransition()
