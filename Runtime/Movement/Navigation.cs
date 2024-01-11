@@ -61,6 +61,7 @@ namespace JV.Movement
         public Vector3 Velocity => _velocity;
         public float HorizontalVelocity => _velocity.x;
         public float VerticalVelocity => _velocity.y;
+        public float Gravity => _gravity;
 
         public event Action TouchWall;
         public event Action TouchGround;
