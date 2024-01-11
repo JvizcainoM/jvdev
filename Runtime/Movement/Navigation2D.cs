@@ -143,7 +143,7 @@ namespace JV.Movement
                     _velocity.y += -fallGravity * Time.deltaTime;
             }
 
-            _velocity.y = Mathf.Max(velocity.y, -maxFallSpeed);
+            _velocity.y = Mathf.Max(_velocity.y, -maxFallSpeed);
             _velocity.z = 0;
 
             CalculateDrag();
