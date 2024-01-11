@@ -1,6 +1,6 @@
 {
   "name": "com.jvizcode.jvdev",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "displayName": "JVDev",
   "description": "Custom package for develop my games in Unity",
   "unity": "2022.3",

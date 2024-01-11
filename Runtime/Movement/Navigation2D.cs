@@ -135,12 +135,16 @@ namespace JV.Movement
 
         public override void UpdateVelocity()
         {
-            if (useGravity) _velocity.y += -_gravity * Time.deltaTime;
-            if (!(_velocity.y < 0)) return;
+            if (useGravity)
+            {
+                if (_velocity.y >= 0)
+                    _velocity.y += -_gravity * Time.deltaTime;
+                else
+                    _velocity.y += -fallGravity * Time.deltaTime;
+            }
 
-            if (useGravity) _velocity.y += -fallGravity * Time.deltaTime;
-            var velocity = _velocity;
-            _velocity = new Vector3(velocity.x, Mathf.Max(velocity.y, -maxFallSpeed), velocity.z);
+            _velocity.y = Mathf.Max(velocity.y, -maxFallSpeed);
+            _velocity.z = 0;
 
             CalculateDrag();
             CalculateFriction();
