@@ -159,10 +159,9 @@ namespace JV.Movement
                 ForceMode.Force => (force / mass) * Time.deltaTime,
                 ForceMode.Acceleration => force * Time.deltaTime,
                 ForceMode.Impulse => (force / mass),
+                ForceMode.VelocityChange => (force - _velocity),
                 _ => Vector3.zero
             };
-
-            if (mode == ForceMode.VelocityChange) _velocity = force;
         }
 
         private void CalculateFriction()
