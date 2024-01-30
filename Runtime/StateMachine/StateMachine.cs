@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JV.StateMachine
+namespace JvDev.StateMachine
 {
     public class StateMachine
     {

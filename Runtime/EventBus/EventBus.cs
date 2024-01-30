@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Workshop
+namespace JvDev.EventBus
 {
     public static class EventBus<T> where T : IEvent
     {

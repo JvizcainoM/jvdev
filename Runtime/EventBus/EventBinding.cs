@@ -1,6 +1,6 @@
 using System;
 
-namespace Workshop
+namespace JvDev.EventBus
 {
     public class EventBinding<T> : IEventBinding<T> where T : IEvent
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace JV.Movement
+namespace JvDev.Movement
 {
     public interface IPhysicsBody
     {

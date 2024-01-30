@@ -1,5 +1,5 @@
 {
-    "name": "JvDev.Spawns",
+    "name": "JvDev.EventBus",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
