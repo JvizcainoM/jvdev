@@ -1,7 +1,9 @@
 {
-    "name": "JvDev.Spawns",
+    "name": "JvDev",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:847ec936f504da54196d85782f2d7055"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

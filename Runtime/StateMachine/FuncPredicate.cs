@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JV.StateMachine
+namespace JvDev.StateMachine
 {
     public class FuncPredicate : IPredicate
     {

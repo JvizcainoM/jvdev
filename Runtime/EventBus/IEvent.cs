@@ -1,4 +1,4 @@
-namespace Workshop
+namespace JvDev.EventBus
 {
     public interface IEvent {}
 }

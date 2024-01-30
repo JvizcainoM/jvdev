@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace JV.SpawnSystem
+namespace JvDev.Spawn
 {
     public interface ISpawnPointStrategy
     {

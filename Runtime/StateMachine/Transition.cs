@@ -1,4 +1,4 @@
-﻿namespace JV.StateMachine
+﻿namespace JvDev.StateMachine
 {
     public class Transition : ITransition
     {
