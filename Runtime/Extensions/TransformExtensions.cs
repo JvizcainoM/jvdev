@@ -76,9 +76,4 @@ public static class TransformExtensions {
             action(parent.GetChild(i));
         }
     }
-    
-    [Obsolete("Renamed to ForEveryChild")]
-    static void PerformActionOnChildren(this Transform parent, System.Action<Transform> action) {
-        parent.ForEveryChild(action);
-    }
 }
