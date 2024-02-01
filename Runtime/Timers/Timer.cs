@@ -4,8 +4,8 @@ namespace JvDev.Utils.Timers
 {
     public abstract class Timer
     {
-        protected float InitialTime;
-        protected float Time { get; set; }
+        public float InitialTime { get; protected set; }
+        public float Time { get; protected set; }
         public bool IsRunning { get; protected set; }
         public float Progress => Time / InitialTime;
 
