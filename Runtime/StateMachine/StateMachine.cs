@@ -9,6 +9,7 @@ namespace JvDev.StateMachine
         private StateNode _currentNode;
         private readonly Dictionary<Type, StateNode> _nodes = new();
         private readonly HashSet<ITransition> _anyTransitions = new();
+        public IState CurrentState => _currentNode.State;
 
         public void Update()
         {
