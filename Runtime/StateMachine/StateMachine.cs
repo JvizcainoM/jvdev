@@ -29,6 +29,18 @@ namespace JvDev.StateMachine
             _currentNode.State.Enter(null);
         }
 
+        public void ChangeState(Type newStateType)
+        {
+            if (newStateType == _currentNode.State.GetType())
+                return;
+
+            var lastState = _currentNode.State;
+            _currentNode = _nodes[newStateType];
+        
+            lastState.Exit(_currentNode.State);
+            _currentNode.State.Enter(lastState);
+        }
+
         public void ChangeState(IState newState)
         {
             if (newState == _currentNode.State)
