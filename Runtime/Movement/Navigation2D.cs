@@ -166,7 +166,7 @@ namespace JvDev.Movement
 
         private void CalculateFriction()
         {
-            if (friction <= 0) return;
+            if (friction <= 0 || !IsOnGround) return;
 
             var frictionForce = Mathf.Min(Mathf.Abs(_velocity.x), friction);
             var frX = frictionForce * Mathf.Sign(_velocity.x);
