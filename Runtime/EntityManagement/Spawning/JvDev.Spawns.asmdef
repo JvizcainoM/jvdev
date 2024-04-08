@@ -1,5 +1,5 @@
 {
-    "name": "JvDev.Spawns",
+    "name": "JvDev.EntityManagement.Spawns",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
