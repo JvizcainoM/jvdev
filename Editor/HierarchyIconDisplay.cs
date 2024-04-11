@@ -34,6 +34,7 @@ public static class HierarchyIconDisplay
         if (components == null || components.Length == 0) return;
 
         var component = components.Length > 1 ? components[1] : components[0];
+        if (component == null) return;
         var type = component.GetType();
         var content = EditorGUIUtility.ObjectContent(component, type);
         content.text = null;
