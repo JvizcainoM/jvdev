@@ -30,6 +30,9 @@ namespace JvDev.BetterTimers
 #endif
         }
 
+
+#if UNITY_EDITOR
+        
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
             if (state is PlayModeStateChange.ExitingPlayMode)
@@ -40,6 +43,8 @@ namespace JvDev.BetterTimers
                 TimerManager.Clear();
             }
         }
+#endif
+
 
         private static bool InsertTimerManager<T>(ref PlayerLoopSystem loop, int index)
         {
