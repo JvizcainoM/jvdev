@@ -35,7 +35,7 @@ namespace JvDev.BetterTimers
             OnTimerStart();
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
             if (!IsRunning) return;
 

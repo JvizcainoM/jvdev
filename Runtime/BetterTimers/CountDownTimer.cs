@@ -19,6 +19,12 @@ namespace JvDev.BetterTimers
             }
         }
 
+        public override void Stop()
+        {
+            CurrentTime = 0;
+            base.Stop();
+        }
+
         public override bool IsFinished => CurrentTime <= 0;
     }
 }
