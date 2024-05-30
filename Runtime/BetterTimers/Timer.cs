@@ -8,16 +8,16 @@ namespace JvDev.BetterTimers
         public float CurrentTime { get; protected set; }
         public bool IsRunning { get; protected set; }
 
-        protected float initialTime;
+        public float InitialTime { get; protected set; }
 
-        public float Progress => Mathf.Clamp01(CurrentTime / initialTime);
+        public float Progress => Mathf.Clamp01(CurrentTime / InitialTime);
 
         public event Action OnTimerStart = delegate { };
         public event Action OnTimerStop = delegate { };
 
         public Timer(float time)
         {
-            initialTime = time;
+            InitialTime = time;
         }
 
         ~Timer()
@@ -27,7 +27,7 @@ namespace JvDev.BetterTimers
 
         public void Start()
         {
-            CurrentTime = initialTime;
+            CurrentTime = InitialTime;
             if (IsRunning) return;
 
             IsRunning = true;
@@ -50,11 +50,11 @@ namespace JvDev.BetterTimers
         public void Pause() => IsRunning = false;
         public void Resume() => IsRunning = true;
 
-        public virtual void Reset() => CurrentTime = initialTime;
+        public virtual void Reset() => CurrentTime = InitialTime;
 
         public virtual void Reset(float time)
         {
-            initialTime = time;
+            InitialTime = time;
             Reset();
         }
 
