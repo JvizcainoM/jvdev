@@ -1,8 +1,10 @@
 {
-    "name": "JvDev.Extentions",
+    "name": "UnityUtils.Hotkeys",
     "rootNamespace": "",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

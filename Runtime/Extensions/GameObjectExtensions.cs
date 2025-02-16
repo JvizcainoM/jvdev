@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Linq;
 
-namespace JvDev.Extensions
-{
+namespace UnityUtils {
     public static class GameObjectExtensions {
         /// <summary>
         /// This method is used to hide the GameObject in the Hierarchy view.
@@ -11,7 +10,7 @@ namespace JvDev.Extensions
         public static void HideInHierarchy(this GameObject gameObject) {
             gameObject.hideFlags = HideFlags.HideInHierarchy;
         }
-    
+
         /// <summary>
         /// Gets a component of the given type attached to the GameObject. If that type of component does not exist, it adds one.
         /// </summary>
@@ -23,10 +22,10 @@ namespace JvDev.Extensions
         /// <typeparam name="T">The type of the component to get or add.</typeparam>
         /// <param name="gameObject">The GameObject to get the component from or add the component to.</param>
         /// <returns>The existing component of the given type, or a new one if no such component exists.</returns>    
-        public static T GetOrAdd<T> (this GameObject gameObject) where T : Component {
+        public static T GetOrAdd<T>(this GameObject gameObject) where T : Component {
             T component = gameObject.GetComponent<T>();
             if (!component) component = gameObject.AddComponent<T>();
-        
+
             return component;
         }
 
@@ -42,8 +41,8 @@ namespace JvDev.Extensions
         /// <typeparam name="T">The type of the object.</typeparam>
         /// <param name="obj">The object being checked.</param>
         /// <returns>The object itself if it exists and not destroyed, null otherwise.</returns>
-        public static T OrNull<T> (this T obj) where T : Object => obj ? obj : null;
-    
+        public static T OrNull<T>(this T obj) where T : Object => obj ? obj : null;
+
         /// <summary>
         /// Destroys all children of the game object
         /// </summary>
@@ -51,7 +50,7 @@ namespace JvDev.Extensions
         public static void DestroyChildren(this GameObject gameObject) {
             gameObject.transform.DestroyChildren();
         }
-    
+
         /// <summary>
         /// Immediately destroys all children of the given GameObject.
         /// </summary>
@@ -59,7 +58,7 @@ namespace JvDev.Extensions
         public static void DestroyChildrenImmediate(this GameObject gameObject) {
             gameObject.transform.DestroyChildrenImmediate();
         }
-    
+
         /// <summary>
         /// Enables all child GameObjects associated with the given GameObject.
         /// </summary>
@@ -67,14 +66,14 @@ namespace JvDev.Extensions
         public static void EnableChildren(this GameObject gameObject) {
             gameObject.transform.EnableChildren();
         }
-        
+
         /// <summary>
         /// Disables all child GameObjects associated with the given GameObject.
         /// </summary>
         /// <param name="gameObject">GameObject whose child GameObjects are to be disabled.</param>
         public static void DisableChildren(this GameObject gameObject) {
             gameObject.transform.DisableChildren();
-        }        
+        }
 
         /// <summary>
         /// Resets the GameObject's transform's position, rotation, and scale to their default values.
@@ -83,7 +82,7 @@ namespace JvDev.Extensions
         public static void ResetTransformation(this GameObject gameObject) {
             gameObject.transform.Reset();
         }
-    
+
         /// <summary>
         /// Returns the hierarchical path in the Unity scene hierarchy for this GameObject.
         /// </summary>
@@ -91,9 +90,9 @@ namespace JvDev.Extensions
         /// <returns>A string representing the full hierarchical path of this GameObject in the Unity scene.
         /// This is a '/'-separated string where each part is the name of a parent, starting from the root parent and ending
         /// with the name of the specified GameObjects parent.</returns>
-        public static string Path(this GameObject gameObject)
-        {
-            return "/" + string.Join("/", gameObject.GetComponentsInParent<Transform>().Select(t => t.name).Reverse().ToArray());
+        public static string Path(this GameObject gameObject) {
+            return "/" + string.Join("/",
+                gameObject.GetComponentsInParent<Transform>().Select(t => t.name).Reverse().ToArray());
         }
 
         /// <summary>
@@ -103,8 +102,7 @@ namespace JvDev.Extensions
         /// <returns>A string representing the full hierarchical path of this GameObject in the Unity scene.
         /// This is a '/'-separated string where each part is the name of a parent, starting from the root parent and ending
         /// with the name of the specified GameObject itself.</returns>
-        public static string PathFull(this GameObject gameObject)
-        {
+        public static string PathFull(this GameObject gameObject) {
             return gameObject.Path() + "/" + gameObject.name;
         }
 
@@ -113,8 +111,7 @@ namespace JvDev.Extensions
         /// </summary>
         /// <param name="gameObject">The GameObject to set layers for.</param>
         /// <param name="layer">The layer number to set for GameObject and all of its descendants.</param>
-        public static void SetLayersRecursively(this GameObject gameObject, int layer)
-        {
+        public static void SetLayersRecursively(this GameObject gameObject, int layer) {
             gameObject.layer = layer;
             gameObject.transform.ForEveryChild(child => child.gameObject.SetLayersRecursively(layer));
         }

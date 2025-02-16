@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JvDev.Extensions
-{
+namespace UnityUtils {
     public static class EnumeratorExtensions {
         /// <summary>
         /// Converts an IEnumerator<T> to an IEnumerable<T>.

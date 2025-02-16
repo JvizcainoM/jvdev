@@ -1,5 +1,5 @@
 ﻿using System;
-using JvDev.Extensions;
+using UnityUtils;
 
 public class Preconditions {
     Preconditions() { }
