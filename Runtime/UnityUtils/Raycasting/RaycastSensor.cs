@@ -4,7 +4,7 @@ namespace JvDev.UnityUtils.RayCasting
 {
     public class RaycastSensor
     {
-        private RaycastSensor(Transform t)
+        public RaycastSensor(Transform t)
         {
             _transform = t;
         }
@@ -72,49 +72,6 @@ namespace JvDev.UnityUtils.RayCasting
                 Color.green, Time.deltaTime);
             Debug.DrawLine(_hitInfo.point + Vector3.forward * markerSize,
                 _hitInfo.point - Vector3.forward * markerSize, Color.green, Time.deltaTime);
-        }
-
-        public class Builder
-        {
-            private readonly Transform _transform;
-            private float _castLength = 1f;
-            private LayerMask _layerMask = 255;
-            private QueryTriggerInteraction _triggerInteraction = QueryTriggerInteraction.Ignore;
-
-            public Builder(Transform transform)
-            {
-                _transform = transform;
-            }
-
-            public Builder SetCastLength(float length)
-            {
-                _castLength = length;
-                return this;
-            }
-
-            public Builder SetLayerMask(LayerMask mask)
-            {
-                _layerMask = mask;
-                return this;
-            }
-
-            public Builder SetTriggerInteraction(QueryTriggerInteraction interaction)
-            {
-                _triggerInteraction = interaction;
-                return this;
-            }
-
-            public RaycastSensor Build()
-            {
-                var sensor = new RaycastSensor(_transform)
-                {
-                    CastLength = _castLength,
-                    LayerMask = _layerMask,
-                    TriggerInteraction = _triggerInteraction
-                };
-
-                return sensor;
-            }
         }
     }
 }
