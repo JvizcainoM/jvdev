@@ -1,56 +1,98 @@
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
-
-[InitializeOnLoad]
-public static class HierarchyIconDisplay
+namespace Playmex.Editor
 {
-    private static bool _hierarchyHasFocus;
-    private static EditorWindow _hierarchyWindow;
-
-    static HierarchyIconDisplay()
+    [InitializeOnLoad]
+    public static class HierarchyIconDisplay
     {
-        EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
-        EditorApplication.update += OnEditorUpdate;
-    }
+        private static bool _hierarchyHasFocus;
+        private static EditorWindow _hierarchyWindow;
 
-    private static void OnEditorUpdate()
-    {
-        if (_hierarchyWindow == null)
-            _hierarchyWindow =
-                EditorWindow.GetWindow(System.Type.GetType("UnityEditor.SceneHierarchyWindow,UnityEditor"));
+        static HierarchyIconDisplay()
+        {
+            EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
+            EditorApplication.update += OnEditorUpdate;
+        }
 
-        _hierarchyHasFocus = EditorWindow.focusedWindow != null
-                             && EditorWindow.focusedWindow == _hierarchyWindow;
-    }
+        private static void OnEditorUpdate()
+        {
+            if (_hierarchyWindow == null)
+                _hierarchyWindow =
+                    EditorWindow.GetWindow(System.Type.GetType("UnityEditor.SceneHierarchyWindow,UnityEditor"));
 
-    private static void HierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
-    {
-        var go = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
-        if (go == null) return;
+            _hierarchyHasFocus = EditorWindow.focusedWindow != null
+                                 && EditorWindow.focusedWindow == _hierarchyWindow;
+        }
 
-        var components = go.GetComponents<Component>();
-        if (components == null || components.Length == 0) return;
+        private static void DrawActivateToggle(Rect selectionRect, GameObject go)
+        {
+            var toggleRect = new Rect(selectionRect);
+            toggleRect.x -= 27f;
+            toggleRect.width = 13f;
 
-        var component = components.Length > 1 ? components[1] : components[0];
-        if (component == null) return;
-        var type = component.GetType();
-        var content = EditorGUIUtility.ObjectContent(component, type);
-        content.text = null;
-        content.tooltip = type.Name;
+            var isActive = go.activeSelf;
+            var newIsActive = EditorGUI.Toggle(toggleRect, isActive);
+            if (newIsActive == isActive) return;
+            Undo.RecordObject(go, "Toggle active state");
+            go.SetActive(newIsActive);
+            EditorSceneManager.MarkSceneDirty(go.scene);
+        }
 
-        if (content.image == null) return;
+        private static bool HasMissingComponentsInHierarchy(GameObject go)
+        {
+            var components = go.GetComponents<Component>();
+            if (components != null && components.Any(c => c == null))
+                return true;
+            
+            foreach (Transform child in go.transform)
+            {
+                if (HasMissingComponentsInHierarchy(child.gameObject))
+                    return true;
+            }
 
-        var isSelected = Selection.instanceIDs.Contains(instanceID);
-        var isHovering = selectionRect.Contains(Event.current.mousePosition);
+            return false;
+        }
 
-        var color = UnityEditorBackgroundColor.Get(isSelected, isHovering, _hierarchyHasFocus);
-        // var color = UnityEditorBackgroundColor.SimpleColor;
-        var backgroundRect = selectionRect;
-        backgroundRect.width = 18.5f;
-        EditorGUI.DrawRect(backgroundRect, color);
+        private static void HierarchyWindowItemOnGUI(int instanceID, Rect selectionRect)
+        {
+            var go = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
+            if (go == null) return;
+            DrawActivateToggle(selectionRect, go);
 
-        EditorGUI.LabelField(selectionRect, content);
+            
+            if (HasMissingComponentsInHierarchy(go))
+            {
+                var warningIcon = EditorGUIUtility.IconContent("console.warnicon");
+                var iconRect = new Rect(selectionRect);
+                iconRect.x -= 44f;
+                iconRect.width = 16f;
+                GUI.Label(iconRect, warningIcon);
+            }
+
+            var components = go.GetComponents<Component>();
+            if (components == null || components.Length == 0) return;
+
+            var component = components.Length > 1 ? components[1] ?? components[0] : components[0];
+
+            var type = component.GetType();
+            var content = EditorGUIUtility.ObjectContent(component, type);
+            content.text = null;
+            content.tooltip = type.Name;
+
+            if (content.image == null) return;
+
+            var isSelected = Selection.instanceIDs.Contains(instanceID);
+            var isHovering = selectionRect.Contains(Event.current.mousePosition);
+
+            var color = UnityEditorBackgroundColor.Get(isSelected, isHovering, _hierarchyHasFocus); ;
+            var backgroundRect = selectionRect;
+            backgroundRect.width = 18.5f;
+            EditorGUI.DrawRect(backgroundRect, color);
+
+            EditorGUI.LabelField(selectionRect, content);
+        }
     }
 }
